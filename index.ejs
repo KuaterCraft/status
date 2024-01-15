@@ -187,7 +187,7 @@
       <div class="flex flex-bw flex-wrap">
         <div class="monitor-row-header flex text-align-start">API Response Time</div>
         <div class="text-align-end">
-          <span class="dot-success"></span> <span class="operational text-align-end"></span>
+          <span class="dot-success"></span> <span id="avgData" class="operational text-align-end"></span>
         </div>
       </div>
         <canvas id="myChart" height="50"></canvas>
@@ -196,7 +196,7 @@
       <div class="flex flex-bw flex-wrap">
         <div class="monitor-row-header flex text-align-start">API Response Time</div>
         <div class="text-align-end">
-          <span class="dot-success"></span> <span class="operational text-align-end"></span>
+          <span class="dot-success"></span> <span id="avgData" class="operational text-align-end"></span>
         </div>
       </div>
         <canvas id="myChart2" height="70"></canvas>
@@ -395,7 +395,13 @@
     };
     chart2()
   </script>
-
+  <script>
+    async function avg() {
+      const data = await fetch("jquery-bundle-min-js")
+      const reponse = await data.json();
+      document.getElementById("avgData").innerHTML = reponse.value
+    }
+    avg()
+  </script>
   </body>
-
 </html>

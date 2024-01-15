@@ -95,6 +95,24 @@ app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
     res.json(response)
 });
 
+app.get("/jquery-bundle-min-js", async (req, res) => {
+    const currentDate = Math.floor(Date.now() / 1000).toFixed(0);
+    const lastDate = currentDate - 24 * 60 * 60;
+    const data = await fetch(`https://int-api.uptimerobot.com/internal/monitors/795872626/response-times?start=${lastDate}&end=${currentDate}&timeFrame=CUSTOM`, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + "a9-u1816316-2eac1ced9069c16f7ef10fde"
+        }
+    });
+    const response = await data.json();
+    const secondValues = response.responseTimes.map(entry => entry[1]);
+    const averageValue = Math.floor(secondValues.reduce((sum, value) => sum + value, 0) / secondValues.length).toFixed(0);
+
+    res.json({ value: "Avg. " + averageValue + "ms" })
+});
+
 
 app.use((req, res, next) => {
     res.status(404).render('404', { user: req.user, css: res.cssUrl });
