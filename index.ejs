@@ -71,10 +71,10 @@
                 <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 816 30">
                   <% monitor.dailyRatios.forEach(function(dailyRatio, index) { %>
                     <rect height="30" width="6" x="<%= 800.8 - (index * 10) %>" y="0"
-                      fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#4d4d3b' : '#9a9184')) %>"
+                      fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#f3983e' : '#870700')) %>"
                       fill-opacity="1" rx="3" ry="3"
                       uk-tooltip="title: <%= formatDate(dailyRatio.label) %>, ratio: <%= dailyRatio.ratio %>;"
-                      style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#4d4d3b' : '#9a9184')) %>;"
+                      style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#f3983e' : '#870700')) %>;"
                       title="" aria-expanded="false"></rect>
                   <% }); %>
                 </svg>
@@ -96,10 +96,10 @@
                   <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 816 30">
                     <% monitor.dailyRatios.forEach(function(dailyRatio, index) { %>
                       <rect height="30" width="6" x="<%= 800.8 - (index * 10) %>" y="0"
-                        fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#4d4d3b' : '#9a9184')) %>"
+                        fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#f3983e' : '#870700')) %>"
                         fill-opacity="1" rx="3" ry="3"
                         uk-tooltip="title: <%= formatDate(dailyRatio.label) %>, ratio: <%= dailyRatio.ratio %>;"
-                        style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#4d4d3b' : '#9a9184')) %>;"
+                        style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' ? '#f3983e' : '#870700')) %>;"
                         title="" aria-expanded="false"></rect>
                     <% }); %>
                   </svg>
