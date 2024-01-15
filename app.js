@@ -27,7 +27,17 @@ app.use((req, res, next) => {
     ];
     next();
 });
+app.use((req, res, next) => {
 
+    res.cssUrl = [
+        'https://css-h964-z1pz.onrender.com/css/style',
+        'https://css-h964-z1pz.onrender.com/css/bootstrap',
+        'https://css-h964-z1pz.onrender.com/css/cmd',
+    ];
+
+
+    next();
+})
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname));
 app.use('/css', express.static(path.join(__dirname, 'css')));
@@ -74,7 +84,6 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
     const response = await data.json();
     res.json(response)
 });
-
 app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
     const authHeader = req.headers.authorization;
     const key = "a9-u1816316-8955e672d5cba430fd018e61";
