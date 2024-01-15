@@ -27,7 +27,11 @@
   <% for (const link of css) { %>
     <link rel="stylesheet" href="<%= link %>">
     <% } %>
+<style>
+  @media screen and (max-width: 991px) {
     
+  }
+</style>
 </head>
 <%- include('navbar') %>
   <div class="container-fluid bg-secondary p-0">
@@ -51,7 +55,8 @@
       <h1 class="display-5 mb-0">Services!</h1>
       <hr class="w-25 mx-auto bg-primary">
     </div>
-    <div class="service-item-2 size">
+    <!-- PC -->
+    <div class="d-none d-lg-block service-item-2 size my-2">
       <div class="monitor-list">
         <% data.psp.monitors.forEach(function(monitor) { %>
           <div class="monitor-row">
@@ -68,15 +73,16 @@
                 </div>
               </div>
               <div class="monitor-chart">
-                <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 816 30">
+                <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                  viewBox="0 0 816 30">
                   <% monitor.dailyRatios.forEach(function(dailyRatio, index) { %>
                     <rect height="30" width="6" x="<%= 800.8 - (index * 10) %>" y="0"
                       fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>""
-                      fill-opacity="1" rx="3" ry="3"
+                      fill-opacity=" 1" rx="3" ry="3"
                       uk-tooltip="title: <%= formatDate(dailyRatio.label) %>, ratio: <%= dailyRatio.ratio %>;"
-                      style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>";"
-                      title="" aria-expanded="false"></rect>
-                  <% }); %>
+                      style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>"
+                      ;" title="" aria-expanded="false"></rect>
+                    <% }); %>
                 </svg>
               </div>
 
@@ -93,15 +99,16 @@
                   </div>
                 </div>
                 <div class="monitor-chart">
-                  <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 816 30">
+                  <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                    viewBox="0 0 816 30">
                     <% monitor.dailyRatios.forEach(function(dailyRatio, index) { %>
                       <rect height="30" width="6" x="<%= 800.8 - (index * 10) %>" y="0"
                         fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>""
-                        fill-opacity="1" rx="3" ry="3"
+                        fill-opacity=" 1" rx="3" ry="3"
                         uk-tooltip="title: <%= formatDate(dailyRatio.label) %>, ratio: <%= dailyRatio.ratio %>;"
-                        style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>";"
-                        title="" aria-expanded="false"></rect>
-                    <% }); %>
+                        style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>"
+                        ;" title="" aria-expanded="false"></rect>
+                      <% }); %>
                   </svg>
                 </div>
 
@@ -111,7 +118,88 @@
 
           <% }); %>
       </div>
-    
+    </div>
+    <!--mobi-->
+    <div class="d-block d-lg-none service-item-2 size my-2">
+      <div class="monitor-list">
+        <% data.psp.monitors.forEach(function(monitor) { %>
+          <div class="monitor-row">
+            <% if (monitor.statusClass==="success" ) { %>
+
+              <div class="flex flex-bw flex-wrap">
+                <div class="monitor-row-header flex text-align-start">
+                  <%= monitor.name %> | <span class="percentage">
+                      <%= monitor['90dRatio'].ratio %>%
+                    </span>
+                </div>
+                <div class="text-align-end">
+                  <span class="dot-success"></span> <span class="operational text-align-end">Operational</span>
+                </div>
+              </div>
+              <div class="monitor-chart">
+                <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                  viewBox="0 0 300 30">
+                  <% monitor.dailyRatios.forEach(function(dailyRatio, index) { %>
+                    <rect height="30" width="6" x="<%= 280.8 - (index * 10) %>" y="0"
+                      fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>""
+                      fill-opacity=" 1" rx="3" ry="3"
+                      uk-tooltip="title: <%= formatDate(dailyRatio.label) %>, ratio: <%= dailyRatio.ratio %>;"
+                      style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>"
+                      ;" title="" aria-expanded="false"></rect>
+                    <% }); %>
+                </svg>
+              </div>
+
+              <% } else { %>
+
+                <div class="flex flex-bw flex-wrap">
+                  <div class="monitor-row-header flex text-align-start">
+                    <%= monitor.name %> | <span class="percentage">
+                        <%= monitor['90dRatio'].ratio %>%
+                      </span>
+                  </div>
+                  <div class="text-align-end">
+                    <span class="dot-down"></span> <span class="down text-align-end">Down</span>
+                  </div>
+                </div>
+                <div class="monitor-chart">
+                  <svg id="dynamic-svg" width="100%" height="30" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                    viewBox="0 0 816 30">
+                    <% monitor.dailyRatios.forEach(function(dailyRatio, index) { %>
+                      <rect height="30" width="6" x="<%= 800.8 - (index * 10) %>" y="0"
+                        fill="<%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>""
+                        fill-opacity=" 1" rx="3" ry="3"
+                        uk-tooltip="title: <%= formatDate(dailyRatio.label) %>, ratio: <%= dailyRatio.ratio %>;"
+                        style="--darkreader-inline-fill: <%= (dailyRatio.label === 'success' ? '#efc75e' : (dailyRatio.label === 'warning' && dailyRatio.ratio > 60 ? '#fa6e2d' : (dailyRatio.label === 'warning' && dailyRatio.ratio <= 60 ? '#fa3e3e' : '#9a9184'))) %>"
+                        ;" title="" aria-expanded="false"></rect>
+                      <% }); %>
+                  </svg>
+                </div>
+
+                <% } %>
+
+          </div>
+
+          <% }); %>
+      </div>
+    </div>
+    <div class="d-none d-lg-block service-item-2 size">
+      <div class="flex flex-bw flex-wrap">
+        <div class="monitor-row-header flex text-align-start">API Response Time</div>
+        <div class="text-align-end">
+          <span class="dot-success"></span> <span class="operational text-align-end"></span>
+        </div>
+      </div>
+        <canvas id="myChart" height="50"></canvas>
+    </div>
+    <div class="d-block d-lg-none service-item-2 size">
+      <div class="flex flex-bw flex-wrap">
+        <div class="monitor-row-header flex text-align-start">API Response Time</div>
+        <div class="text-align-end">
+          <span class="dot-success"></span> <span class="operational text-align-end"></span>
+        </div>
+      </div>
+        <canvas id="myChart2" height="50"></canvas>
     </div>
   </div>
 
@@ -169,9 +257,145 @@
   <script src="lib/waypoints/waypoints.min.js"></script>
   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <script>
+    async function chart() {
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const data = await fetch("/bootstrap-bundle-min-js", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer a9-u1816316-2eac1ced9069c16f7ef10fde"
+        }
+      })
+      const response = await data.json();
+      const responseTimes = response.responseTimes.map(([timestamp, responseTime]) => ({
+        x: new Date(timestamp * 1000),
+        y: responseTime,
+      }));
+      const skipped = (ctx, value) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
+      const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined;
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: responseTimes.map(entry => entry.x),
+          datasets: [{
+            label: 'API Response Time',
+            data: responseTimes.map(entry => entry.y),
+            backgroundColor: 'rgba(239, 199, 94, 0.2)',
+            borderColor: 'rgba(239, 199, 94, 1)',
+            borderWidth: 1,
+            segment: {
+              borderColor: ctx => skipped(ctx, 'rgb(0,0,0,0.2)') || down(ctx, 'rgb(192,75,75)'),
+              borderDash: ctx => skipped(ctx, [6, 6]),
+            },
+            spanGaps: true
+          }]
+        },
+        options: {
+          interaction: {
+            intersect: false
+          },
+          responsive: true,
+          plugins: {
+            tooltip: {
+              mode: 'index',
+              intersect: false
+            },
+          },
+          hover: {
+            mode: 'index',
+            intersec: true
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 500,
+              },
+              max: 1000
+            },
+            x: {
+              display: false,
+              ticks: {
+                stepSize: 500,
+              },
+            },
+          }
+        }
+      });
+    };
+    chart()
   </script>
+  <script>
+    async function chart2() {
+      const ctx = document.getElementById('myChart2').getContext('2d');
+      const data = await fetch("/bootstrap-bundle-min-js-2", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer a9-u1816316-2eac1ced9069c16f7ef10fde"
+        }
+      })
+      const response = await data.json();
+      const responseTimes = response.responseTimes.map(([timestamp, responseTime]) => ({
+        x: new Date(timestamp * 1000),
+        y: responseTime,
+      }));
+      const skipped = (ctx, value) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
+      const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined;
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: responseTimes.map(entry => entry.x),
+          datasets: [{
+            label: 'API Response Time',
+            data: responseTimes.map(entry => entry.y),
+            backgroundColor: 'rgba(239, 199, 94, 0.2)',
+            borderColor: 'rgba(239, 199, 94, 1)',
+            borderWidth: 1,
+            segment: {
+              borderColor: ctx => skipped(ctx, 'rgb(0,0,0,0.2)') || down(ctx, 'rgb(192,75,75)'),
+              borderDash: ctx => skipped(ctx, [6, 6]),
+            },
+            spanGaps: true
+          }]
+        },
+        options: {
+          interaction: {
+            intersect: false
+          },
+          responsive: true,
+          plugins: {
+            tooltip: {
+              mode: 'index',
+              intersect: false
+            },
+          },
+          hover: {
+            mode: 'index',
+            intersec: true
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 500,
+              },
+              max: 1000
+            },
+            x: {
+              display: false,
+              ticks: {
+                stepSize: 500,
+              },
+            },
+          }
+        }
+      });
+    };
+    chart2()
+  </script>
+
   </body>
 
 </html>
