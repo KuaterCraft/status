@@ -57,7 +57,7 @@ app.get('/', async (req, res) => {
 
 app.post("/bootstrap-bundle-min-js", async (req, res) => {
     const authHeader = req.headers.authorization;
-    const key = "a9-u1816316-2eac1ced9069c16f7ef10fde";
+    const key = "a9-u1816316-8955e672d5cba430fd018e61";
     if (authHeader !== `Bearer ${key}`) {
         return res.status(401).json({ error: "Unauthorised" })
     }
@@ -68,7 +68,7 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-2eac1ced9069c16f7ef10fde"
+            "Authorization": "Bearer " + "a9-u1816316-8955e672d5cba430fd018e61"
         }
     });
     const response = await data.json();
@@ -77,7 +77,7 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
 
 app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
     const authHeader = req.headers.authorization;
-    const key = "a9-u1816316-2eac1ced9069c16f7ef10fde";
+    const key = "a9-u1816316-8955e672d5cba430fd018e61";
     if (authHeader !== `Bearer ${key}`) {
         return res.status(401).json({ error: "Unauthorised" })
     }
@@ -88,7 +88,7 @@ app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-2eac1ced9069c16f7ef10fde"
+            "Authorization": "Bearer " + "a9-u1816316-8955e672d5cba430fd018e61"
         }
     });
     const response = await data.json();
@@ -103,7 +103,7 @@ app.get("/jquery-bundle-min-js", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-2eac1ced9069c16f7ef10fde"
+            "Authorization": "Bearer " + "a9-u1816316-8955e672d5cba430fd018e61"
         }
     });
     const response = await data.json();
