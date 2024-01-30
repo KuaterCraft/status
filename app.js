@@ -21,23 +21,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     res.cssUrl = [
-        'https://css-h964-z1pz.onrender.com/css/style',
-        'https://css-h964-z1pz.onrender.com/css/bootstrap',
-        'https://css-h964-z1pz.onrender.com/css/cmd',
+        'https://css-6emr.onrender.com/css/style',
+        'https://css-6emr.onrender.com/css/bootstrap',
+        'https://css-6emr.onrender.com/css/cmd',
     ];
     next();
 });
-app.use((req, res, next) => {
-
-    res.cssUrl = [
-        'https://css-h964-z1pz.onrender.com/css/style',
-        'https://css-h964-z1pz.onrender.com/css/bootstrap',
-        'https://css-h964-z1pz.onrender.com/css/cmd',
-    ];
-
-
-    next();
-})
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname));
 app.use('/css', express.static(path.join(__dirname, 'css')));
@@ -67,7 +56,7 @@ app.get('/', async (req, res) => {
 
 app.post("/bootstrap-bundle-min-js", async (req, res) => {
     const authHeader = req.headers.authorization;
-    const key = "a9-u1816316-8955e672d5cba430fd018e61";
+    const key = "a9-u1816316-cc2a0b2f4a77c88363b4a801";
     if (authHeader !== `Bearer ${key}`) {
         return res.status(401).json({ error: "Unauthorised" })
     }
@@ -78,7 +67,7 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-8955e672d5cba430fd018e61"
+            "Authorization": "Bearer " + "a9-u1816316-cc2a0b2f4a77c88363b4a801"
         }
     });
     const response = await data.json();
@@ -86,7 +75,7 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
 });
 app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
     const authHeader = req.headers.authorization;
-    const key = "a9-u1816316-8955e672d5cba430fd018e61";
+    const key = "a9-u1816316-cc2a0b2f4a77c88363b4a801";
     if (authHeader !== `Bearer ${key}`) {
         return res.status(401).json({ error: "Unauthorised" })
     }
@@ -97,7 +86,7 @@ app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-8955e672d5cba430fd018e61"
+            "Authorization": "Bearer " + "a9-u1816316-cc2a0b2f4a77c88363b4a801"
         }
     });
     const response = await data.json();
@@ -112,7 +101,7 @@ app.get("/jquery-bundle-min-js", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-8955e672d5cba430fd018e61"
+            "Authorization": "Bearer " + "a9-u1816316-cc2a0b2f4a77c88363b4a801"
         }
     });
     const response = await data.json();
