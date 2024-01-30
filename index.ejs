@@ -245,7 +245,7 @@
   <script>
     async function chart() {
       const ctx = document.getElementById('myChart').getContext('2d');
-      const data = await fetch("http://localhost:3000/bootstrap-bundle-min-js", {
+      const data = await fetch("bootstrap-bundle-min-js", {
         method: "POST",
         headers: {
           "Authorization": "Bearer a9-u1816316-cc2a0b2f4a77c88363b4a801"
@@ -314,7 +314,7 @@
   <script>
     async function chart2() {
       const ctx = document.getElementById('myChart2').getContext('2d');
-      const data = await fetch("/bootstrap-bundle-min-js-2", {
+      const data = await fetch("bootstrap-bundle-min-js-2", {
         method: "POST",
         headers: {
           "Authorization": "Bearer a9-u1816316-cc2a0b2f4a77c88363b4a801"
