@@ -247,12 +247,8 @@
       const ctx = document.getElementById('myChart').getContext('2d');
       const data = await fetch("bootstrap-bundle-min-js", {
         method: "POST",
-        headers: {
-          "Authorization": "Bearer a9-u1816316-cc2a0b2f4a77c88363b4a801"
-        }
       })
       const response = await data.json();
-      console.log(response)
       const responseTimes = response.responseTimes.map(([timestamp, responseTime]) => ({
         x: new Date(timestamp * 1000),
         y: responseTime,
@@ -316,10 +312,7 @@
       const ctx = document.getElementById('myChart2').getContext('2d');
       const data = await fetch("bootstrap-bundle-min-js-2", {
         method: "POST",
-        headers: {
-          "Authorization": "Bearer a9-u1816316-cc2a0b2f4a77c88363b4a801"
-        }
-      })
+      });
       const response = await data.json();
       const responseTimes = response.responseTimes.map(([timestamp, responseTime]) => ({
         x: new Date(timestamp * 1000),

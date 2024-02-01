@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config()
 const path = require('path');
 const app = express();
 const session = require('express-session');
@@ -6,6 +7,7 @@ const bodyParser = require('body-parser');
 const moment = require("moment");
 const Chart = require("chartjs");
 const Utils = Chart.Utils;
+const key = process.env.TOKEN;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
@@ -21,9 +23,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     res.cssUrl = [
-        'https://css-6emr.onrender.com/css/style',
-        'https://css-6emr.onrender.com/css/bootstrap',
-        'https://css-6emr.onrender.com/css/cmd',
+        './css/style.css',
+        './css/bootstrap.min.css',
+        './css/commands.css',
     ];
     next();
 });
@@ -51,15 +53,15 @@ app.get('/', async (req, res) => {
     }
     const isSmallScreen = true;
 
-    res.render('index', { data: response, user: req.user, css: res.cssUrl, formatDate: formatDate, isSmallScreen: isSmallScreen });
+    res.render('index', { key: key, data: response, user: req.user, css: res.cssUrl, formatDate: formatDate, isSmallScreen: isSmallScreen });
 });
 
 app.post("/bootstrap-bundle-min-js", async (req, res) => {
     const authHeader = req.headers.authorization;
-    const key = "a9-u1816316-cc2a0b2f4a77c88363b4a801";
-    if (authHeader !== `Bearer ${key}`) {
-        return res.status(401).json({ error: "Unauthorised" })
-    }
+    
+    // if (authHeader !== `Bearer ${key}`) {
+    //     return res.status(401).json({ error: "Unauthorised" })
+    // }
     const currentDate = Math.floor(Date.now() / 1000).toFixed(0);
     const lastDate = currentDate - 7 * 60 * 60;
     const data = await fetch(`https://int-api.uptimerobot.com/internal/monitors/795872626/response-times?start=${lastDate}&end=${currentDate}&timeFrame=CUSTOM`, {
@@ -67,7 +69,7 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-cc2a0b2f4a77c88363b4a801"
+            "Authorization": "Bearer " + key
         }
     });
     const response = await data.json();
@@ -75,10 +77,9 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
 });
 app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
     const authHeader = req.headers.authorization;
-    const key = "a9-u1816316-cc2a0b2f4a77c88363b4a801";
-    if (authHeader !== `Bearer ${key}`) {
-        return res.status(401).json({ error: "Unauthorised" })
-    }
+    // if (authHeader !== `Bearer ${key}`) {
+    //     return res.status(401).json({ error: "Unauthorised" })
+    // }
     const currentDate = Math.floor(Date.now() / 1000).toFixed(0);
     const lastDate = currentDate - 2 * 60 * 60;
     const data = await fetch(`https://int-api.uptimerobot.com/internal/monitors/795872626/response-times?start=${lastDate}&end=${currentDate}&timeFrame=CUSTOM`, {
@@ -86,7 +87,7 @@ app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-cc2a0b2f4a77c88363b4a801"
+            "Authorization": "Bearer " + key
         }
     });
     const response = await data.json();
@@ -101,7 +102,7 @@ app.get("/jquery-bundle-min-js", async (req, res) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "a9-u1816316-cc2a0b2f4a77c88363b4a801"
+            "Authorization": "Bearer " + key
         }
     });
     const response = await data.json();
