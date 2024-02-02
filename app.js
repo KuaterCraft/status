@@ -37,33 +37,74 @@ app.use(express.static(path.join(__dirname)));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 
 app.get('/', async (req, res) => {
-    const data = await fetch("https://stats.uptimerobot.com/api/getMonitorList/4pl0qIcnIi?page=1&_=1705223288793", {
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-    });
-    const response = await data.json();
-    function formatDate(label) {
-        const currentDate = new Date();
-        const targetDate = new Date(currentDate.getTime() - label * 24 * 60 * 60 * 1000);
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return targetDate.toLocaleDateString('en-US', options);
-    }
-    const isSmallScreen = true;
+    try {
+        const data = await fetch("https://stats.uptimerobot.com/api/getMonitorList/4pl0qIcnIi?page=1&_=1705223288793", {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        });
 
-    res.render('index', { key: key, data: response, user: req.user, css: res.cssUrl, formatDate: formatDate, isSmallScreen: isSmallScreen });
+        const response = await data.json();
+
+        function formatDate(label) {
+            const currentDate = new Date();
+            const targetDate = new Date(currentDate.getTime() - label * 24 * 60 * 60 * 1000);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return targetDate.toLocaleDateString('en-US', options);
+        }
+
+        const isSmallScreen = true;
+
+        const monitors = process.env.LIST.replace(/\[|\]/g, '').split(',').map(id => {
+            const parsedId = parseInt(id.trim());
+            if (isNaN(parsedId)) {
+                console.error(`Invalid monitor ID: ${id.trim()}`);
+            }
+            return parsedId;
+        }).filter(id => !isNaN(id));
+
+        const fetchData = async (monitorId) => {
+            try {
+                const response = await fetch(`https://int-api.uptimerobot.com/internal/monitors/${monitorId}`, {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + key
+                    }
+                });
+                const data = await response.json();
+                return { monitorId, data };
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }
+
+        const fetchPromises = monitors.map(monitorId => fetchData(monitorId));
+        const dataMonitor = await Promise.all(fetchPromises);
+        
+
+        res.render('index', { dataMonitor, data: response, css: res.cssUrl, formatDate, isSmallScreen });
+    } catch (error) {
+        console.error(error);
+        // Handle errors appropriately
+        res.status(500).send('Internal Server Error');
+    }
 });
+
 
 app.post("/bootstrap-bundle-min-js", async (req, res) => {
     const authHeader = req.headers.authorization;
-    
+
     // if (authHeader !== `Bearer ${key}`) {
     //     return res.status(401).json({ error: "Unauthorised" })
     // }
     const currentDate = Math.floor(Date.now() / 1000).toFixed(0);
     const lastDate = currentDate - 7 * 60 * 60;
+    //https://int-api.uptimerobot.com/internal/monitors/796129534
     const data = await fetch(`https://int-api.uptimerobot.com/internal/monitors/795872626/response-times?start=${lastDate}&end=${currentDate}&timeFrame=CUSTOM`, {
         method: "GET",
         headers: {
