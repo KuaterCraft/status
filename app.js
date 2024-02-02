@@ -158,6 +158,7 @@ app.use((req, res, next) => {
     res.status(404).render('404', { user: req.user, css: res.cssUrl });
 });
 
-app.listen(3000, () => {
-    console.log("Online")
+const port = process.env.PORT
+app.listen(port, () => {
+    console.log("Online at " + `${port}`)
 });
