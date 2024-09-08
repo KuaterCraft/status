@@ -38,7 +38,7 @@ app.use('/img', express.static(path.join(__dirname, 'img')));
 
 app.get('/', async (req, res) => {
     try {
-        const data = await fetch("https://stats.uptimerobot.com/api/getMonitorList/4pl0qIcnIi?page=1&_=1705223288793", {
+        const data = await fetch("shhhh private :)", {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -67,7 +67,7 @@ app.get('/', async (req, res) => {
 
         const fetchData = async (monitorId) => {
             try {
-                const response = await fetch(`https://int-api.uptimerobot.com/internal/monitors/${monitorId}`, {
+                const response = await fetch(`shhhh private :}`, {
                     method: "GET",
                     headers: {
                         "Accept": "application/json",
@@ -96,7 +96,7 @@ app.get('/', async (req, res) => {
 });
 
 
-app.post("/bootstrap-bundle-min-js", async (req, res) => {
+app.post("/mobidycsrsz", async (req, res) => {
     const authHeader = req.headers.authorization;
 
     // if (authHeader !== `Bearer ${key}`) {
@@ -105,7 +105,7 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
     const currentDate = Math.floor(Date.now() / 1000).toFixed(0);
     const lastDate = currentDate - 7 * 60 * 60;
     //https://int-api.uptimerobot.com/internal/monitors/796129534
-    const data = await fetch(`https://int-api.uptimerobot.com/internal/monitors/795872626/response-times?start=${lastDate}&end=${currentDate}&timeFrame=CUSTOM`, {
+    const data = await fetch(`shhhh private :)`, {
         method: "GET",
         headers: {
             "Accept": "application/json",
@@ -116,14 +116,14 @@ app.post("/bootstrap-bundle-min-js", async (req, res) => {
     const response = await data.json();
     res.json(response)
 });
-app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
+app.post("/test-js-2", async (req, res) => {
     const authHeader = req.headers.authorization;
     // if (authHeader !== `Bearer ${key}`) {
     //     return res.status(401).json({ error: "Unauthorised" })
     // }
     const currentDate = Math.floor(Date.now() / 1000).toFixed(0);
     const lastDate = currentDate - 2 * 60 * 60;
-    const data = await fetch(`https://int-api.uptimerobot.com/internal/monitors/795872626/response-times?start=${lastDate}&end=${currentDate}&timeFrame=CUSTOM`, {
+    const data = await fetch(`naah`, {
         method: "GET",
         headers: {
             "Accept": "application/json",
@@ -135,10 +135,10 @@ app.post("/bootstrap-bundle-min-js-2", async (req, res) => {
     res.json(response)
 });
 
-app.get("/jquery-bundle-min-js", async (req, res) => {
+app.get("/testing4", async (req, res) => {
     const currentDate = Math.floor(Date.now() / 1000).toFixed(0);
     const lastDate = currentDate - 24 * 60 * 60;
-    const data = await fetch(`https://int-api.uptimerobot.com/internal/monitors/795872626/response-times?start=${lastDate}&end=${currentDate}&timeFrame=CUSTOM`, {
+    const data = await fetch(`nope`, {
         method: "GET",
         headers: {
             "Accept": "application/json",
